@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://ctgjf2bumc7q1"]
+[gd_scene load_steps=3 format=3 uid="uid://ctgjf2bumc7q1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kelts"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xpvgf"]
+size = Vector3(60, 2, 60)
 
 [node name="Main" type="Node"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_kelts")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_xpvgf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.864336, 0.502914, 0, -0.502914, -0.864336, 0, 12.6052, 0)
