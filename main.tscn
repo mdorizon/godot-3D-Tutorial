@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctgjf2bumc7q1"]
+[gd_scene load_steps=11 format=3 uid="uid://ctgjf2bumc7q1"]
 
 [ext_resource type="PackedScene" uid="uid://da6367lgaycfe" path="res://player.tscn" id="1_64y1s"]
 [ext_resource type="PackedScene" uid="uid://5duqxvrxtk1i" path="res://mob.tscn" id="1_u3gj3"]
+[ext_resource type="FontFile" uid="uid://bxjslm75yt87o" path="res://fonts/Montserrat-Medium.ttf" id="3_14h6k"]
 
 [sub_resource type="GDScript" id="GDScript_q0xor"]
 script/source = "extends Node
@@ -47,6 +48,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
 }
 point_count = 6
+
+[sub_resource type="Theme" id="Theme_54o0h"]
+default_font = ExtResource("3_14h6k")
+default_font_size = 22
 
 [node name="Main" type="Node"]
 script = SubResource("GDScript_q0xor")
@@ -103,6 +108,22 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14, 1
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_54o0h")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 16.0
+offset_right = 102.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score: 0"
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
