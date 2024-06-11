@@ -12,4 +12,3 @@ MeshInstance3D
 Node3D
 VisibleOnScreenNotifier3D
 CharacterBody3D
-Camera3D
