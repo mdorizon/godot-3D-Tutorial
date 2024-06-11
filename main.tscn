@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctgjf2bumc7q1"]
+[gd_scene load_steps=12 format=3 uid="uid://ctgjf2bumc7q1"]
 
 [ext_resource type="PackedScene" uid="uid://da6367lgaycfe" path="res://player.tscn" id="1_64y1s"]
 [ext_resource type="PackedScene" uid="uid://5duqxvrxtk1i" path="res://mob.tscn" id="1_u3gj3"]
 [ext_resource type="FontFile" uid="uid://bxjslm75yt87o" path="res://fonts/Montserrat-Medium.ttf" id="3_14h6k"]
+[ext_resource type="Script" path="res://ScoreLabel.gd" id="4_b2hhq"]
 
 [sub_resource type="GDScript" id="GDScript_q0xor"]
 script/source = "extends Node
 
 @export var mob_scene: PackedScene
+
 
 func _on_mob_timer_timeout():
 	# Create a new instance of the Mob scene.
@@ -24,7 +26,9 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-
+	
+	# We connect the mob to the score label to update the score upon squashing one.
+	mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
 
 func _on_player_hit():
 	$MobTimer.stop()
@@ -124,6 +128,7 @@ offset_right = 102.0
 offset_bottom = 46.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
+script = ExtResource("4_b2hhq")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
