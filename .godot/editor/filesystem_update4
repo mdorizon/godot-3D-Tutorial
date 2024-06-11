@@ -1,2 +1,5 @@
 res://main.tscn
 res://player.gd
+res://mob.tscn
+res://player.tscn
+res://Mob.gd
